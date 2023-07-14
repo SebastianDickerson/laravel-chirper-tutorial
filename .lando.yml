@@ -1,5 +1,16 @@
-landoname: Chirper
+name: Chirper
+
 recipe: laravel
 config:
   webroot: ./public
   php: '8.1'
+  database: mysql:8.0
+
+services:
+  phpmyadmin:
+    type: phpmyadmin
+    hosts: 
+      - database
+proxy:
+  phpmyadmin:
+    - phpmyadmin.lndo.site
