@@ -7,24 +7,31 @@ use Illuminate\Support\Facades\Http;
 class WeatherService 
 {
 
-    const BASE_URL = "api.openweathermap.org/data/2.5/";
+    const BASE_URL = "api.weatherapi.com/v1/";
 
     static function getForecast ( string $location )
     {
 
         $apiKey = config('app.openweather_api'); 
-        $response = Http::get(self::BASE_URL."forecast?q={$location}&appid={$apiKey}");
+        $response = Http::get(self::BASE_URL."forecast.json?key={$apiKey}&q={$location}&days=5&aqi=no&alerts=no");
 
         return $response->json();
 
     }
 
-    static function parseResponse ( mixed $data ) 
-    {
+    // static function parseResponse ( mixed $data ) 
+    // {
+    //     ['location' => $city, 'forecast' => $forecast] = $data;
+    //     ['forecastday' => $days] = $forecast;
 
-        $obj['city'] = $data->json($key='city')['name'];
+    //     $parsedData = ['city' => $city];
 
-        return $obj;
-    }
+    //     foreach( $days as $day ) {
+    //         ['day' => $date] = $day;
+    //         array($parsedData, $date);
+    //     }
+
+    //     return $parsedData;
+    // }
 
 }
