@@ -15,23 +15,17 @@ class WeatherService
         $apiKey = config('app.openweather_api'); 
         $response = Http::get(self::BASE_URL."forecast.json?key={$apiKey}&q={$location}&days=5&aqi=no&alerts=no");
 
-        return $response->json();
+        return self::parseResponse($response->json());
 
     }
 
-    // static function parseResponse ( mixed $data ) 
-    // {
-    //     ['location' => $city, 'forecast' => $forecast] = $data;
-    //     ['forecastday' => $days] = $forecast;
+    static function parseResponse ( mixed $data ) 
+    {
+        ['location' => $location, 'forecast' => $forecast] = $data;
+        $parsedData['location'] = $location;
+        $parsedData['forecast'] = $forecast['forecastday'];
 
-    //     $parsedData = ['city' => $city];
-
-    //     foreach( $days as $day ) {
-    //         ['day' => $date] = $day;
-    //         array($parsedData, $date);
-    //     }
-
-    //     return $parsedData;
-    // }
+        return $parsedData;
+    }
 
 }
