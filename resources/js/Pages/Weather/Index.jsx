@@ -27,7 +27,7 @@ export default function Index({ auth, data }) {
                         </Dropdown.Content>
                     </Dropdown>
                 </div>
-                <WeatherForecast weather={data} />
+                <WeatherForecast data={data} />
             </div>
         </AuthenticatedLayout>
     )
