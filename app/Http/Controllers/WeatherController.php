@@ -17,7 +17,14 @@ class WeatherController extends Controller
     {
         // Hit weather service pass return as props
         return Inertia::render('Weather/Index', [
-            'data' => WeatherService::getForecast("Brisbane"),
+            'data' => WeatherService::getForecast('london'),
+        ]);
+    }
+
+    public function updateLocation($location): Response
+    {
+        return Inertia::render('Weather/Index', [
+            'data' => WeatherService::getForecast($location),
         ]);
     }
 

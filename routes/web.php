@@ -39,6 +39,8 @@ Route::resource('weather', WeatherController::class)
     ->only(['index'])
     ->middleware(['auth', 'verified']);
 
+Route::get('/weather/{location}', [WeatherController::class, 'updateLocation'])->name('weather.updateLocation');
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

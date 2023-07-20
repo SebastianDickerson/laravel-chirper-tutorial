@@ -7,6 +7,12 @@ import { Head } from '@inertiajs/react';
 
 
 export default function Index({ auth, data }) {
+
+    const locations = [
+        'brisbane',
+        'sunshine coast',
+        'darwin'
+    ];
     
     return (
         <AuthenticatedLayout user={auth.user}>
@@ -21,9 +27,15 @@ export default function Index({ auth, data }) {
                             </PrimaryButton>
                         </Dropdown.Trigger>
                         <Dropdown.Content>
-                            <Dropdown.Link as="button" href="#">
-                                Brisbane
-                            </Dropdown.Link>
+                            {
+                                locations.map((location, idx) => {
+                                    return (
+                                        <Dropdown.Link key={idx} as="button" href={route('weather.updateLocation', location)}>
+                                            {location}
+                                        </Dropdown.Link>
+                                    )
+                                })
+                            }
                         </Dropdown.Content>
                     </Dropdown>
                 </div>
